@@ -1,0 +1,22 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Recommender {% endblock %}
+{% block styles %}
+<style>
+h1{text-align: center;}
+</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+{% endblock %}
+{% block content %}
+<h1> Get Movie and/or TV Show Recommendation </h1>
+{{ wtf.quick_form(recommend_form,button_map={"search": "primary"}, novalidate=True) }}
+ {% for key in recommend_form.errors %}
+        {% for error in recommend_form.errors[key] %}
+            <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    {% endfor %}
+<br>
+<h1> Find Where TV Show and/or Movie Is Streaming </h1>
+{{ wtf.quick_form(search_form, button_map={"search": "primary"}, novalidate=True) }}
+{% endblock %}

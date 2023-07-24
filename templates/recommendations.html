@@ -1,0 +1,29 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %} Recommendations {% endblock %}
+{% block styles %}
+<style>
+h1{text-align: center;}
+</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+{% endblock %}
+{% block content %}
+<h1> Recommendations </h1>
+{% if not titles %}
+<p> No recommendations based on these criteria. </p>
+{% else %}
+{% for i in range(titles|length) %}
+<div class="card" >
+    <div class="front" style="background-image: url({{poster_urls[i]}})">
+    </div>
+    <div class="back">
+      <div>
+    <div class="title">{{titles[i]}} <span class="release_date">({{years[i]}})</span></div>
+          <p class="overview"> {{overviews[i]}} </p>
+          <a href="{{links[i]}}" class="button">{{streaming_names[i]}}</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endif %}
+{% endblock %}
